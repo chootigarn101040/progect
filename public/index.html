@@ -1,65 +1,175 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/5.5.0/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/5.5.0/firebase-auth.js"></script>
-    <script defer src="/__/firebase/5.5.0/firebase-database.js"></script>
-    <script defer src="/__/firebase/5.5.0/firebase-messaging.js"></script>
-    <script defer src="/__/firebase/5.5.0/firebase-storage.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+<head>
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+  <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+  <script src="ejs.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyDk4uvNp5soVTYna-5gn46EYdOWwNykBDk",
+    authDomain: "shopee-87359.firebaseapp.com",
+    databaseURL: "https://shopee-87359.firebaseio.com",
+    projectId: "shopee-87359",
+    storageBucket: "shopee-87359.appspot.com",
+    messagingSenderId: "962649805952"
+  };
+  firebase.initializeApp(config);
+</script>
+  <style>
+    .toolbaricon {
+      padding-left: 5px;
+      padding-bottom: 5px;
+      padding-right: 5px;
+      color: orange;
+    }
+  </style>
+</head>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+<body>
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-icon class="toolbaricon" size="30px" icon="fa-shopping-bag">
+        </ons-icon>
+      </div>
+      <div class="center" id="appname">#</div>
+      <div class="right">
+        <ons-icon class="toolbaricon" size="30px" icon="md-help">
+        </ons-icon>
+      </div>
+    </ons-toolbar>
 
-        try {
-          let app = firebase.app();
-          let features = ['auth', 'database', 'messaging', 'storage'].filter(feature => typeof app[feature] === 'function');
-          document.getElementById('load').innerHTML = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          document.getElementById('load').innerHTML = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
-    </script>
-  </body>
+    <ons-tabbar swipeable position="auto">
+      <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="7" active>
+      </ons-tab>
+      <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
+      </ons-tab>
+    </ons-tabbar>
+  </ons-page>
+
+  <template id="tab1.html">
+    <ons-page id="Tab1">
+      <p style="text-align: center; margin-top: 10px;">
+        <ons-search-input placeholder="Search" onchange="ons.notification.alert('Searched for: ' + this.value)"></ons-search-input>
+      </p>
+      <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
+        <ons-carousel-item id="carousel1" style="background: url('images/1.jpg') no-repeat center; background-size: contain;">
+        </ons-carousel-item>
+        <ons-carousel-item id="carousel2" style="background: url('images/2.jpg') no-repeat center; background-size: contain;">
+        </ons-carousel-item>
+        <ons-carousel-item id="carousel3" style="background: url('images/3.jpg') no-repeat center; background-size: contain;">
+        </ons-carousel-item>
+      </ons-carousel>
+      
+        <div id="icons"></div>
+
+        <script id="icon_template" type="text/template">
+        <ons-row style="height:120px" vertical-align="center">  
+        <% categories.forEach(function(category){%>  
+        <ons-col style="background:#66ff99;" width="33%">
+          <p style="text-align: center; margin: 10px;">
+            <ons-icon size="60px" icon="<%= category.icon %>"></ons-icon>
+          </p>
+          <p style="text-align: center; margin: 10px;" id="icon1_text">
+            <%= category.name %>
+          </p>
+        </ons-col>
+        <%});%>
+        </ons-row>
+        </script>
+
+      
+    </ons-page>
+  </template>
+
+  <template id="tab2.html">
+    <ons-page id="Tab2">
+      <ons-list>
+        <ons-list-header>Shopping Cart</ons-list-header>
+        <ons-list-item>
+          <div class="left">
+            <img class="list-item__thumbnail" src="images/item1.jpg">
+          </div>
+          <div class="center">
+            <span class="list-item__title">Apple Watch Series 3 GPS 42mm Grey</span>
+            <span class="list-item__subtitle" style="color: blue">฿12,650.00</span>
+          </div>
+          <div class="right">
+            <p style="text-align: center; margin: 10px;">
+              <ons-icon style="color: grey" size="30px" icon="md-delete"></ons-icon>
+            </p>
+          </div>
+        </ons-list-item>
+        <ons-list-item>
+          <div class="left">
+            <img class="list-item__thumbnail" src="images/item2.jpg">
+          </div>
+          <div class="center">
+            <span class="list-item__title">MICROLAB SPEAKER 2.1</span>
+            <span class="list-item__subtitle" style="color: blue">฿1,570.00</span>
+          </div>
+          <div class="right">
+            <p style="text-align: center; margin: 10px;">
+              <ons-icon style="color: grey" size="30px" icon="md-delete"></ons-icon>
+            </p>
+          </div>
+        </ons-list-item>
+        <ons-list-item>
+          <div class="left">
+            <img class="list-item__thumbnail" src="images/item3.jpg">
+          </div>
+          <div class="center">
+            <span class="list-item__title">Nike Air Max 90 ดำเทาแดง เบอร์ 40</span>
+            <span class="list-item__subtitle" style="color: blue">฿2,990.00</span>
+          </div>
+          <div class="right">
+            <p style="text-align: center; margin: 10px;">
+              <ons-icon style="color: grey" size="30px" icon="md-delete"></ons-icon>
+            </p>
+          </div>
+        </ons-list-item>
+      </ons-list>
+      <p style="text-align: center; margin: 10px;">
+        <ons-button modifier="large">PROCEED TO PAY</ons-button>
+      </p>
+    </ons-page>
+  </template>
+</body>
+<script>
+  getHomeData();
+  document.addEventListener('prechange', function (event) {
+    if (event.index == 0) {
+      console.log('Home clicked');
+      // get data for home screen  
+      getHomeData();
+    } else if (event.index == 1) {
+      console.log('Cart clicked');
+      // get data for cart screen  
+      getCartData();
+    }
+  });
+  function getHomeData() {
+    $.getJSON('home.json', function (data) {
+      console.log(data);
+      $('#appname').html(data.appname);
+      var style = "background: url('images/" + data.slides[0] + "') no-repeat center; background-size: contain;'";
+      $('#carousel1').attr('style', style)
+      var icon_template = $('#icon_template').html();
+      var html = ejs.render(icon_template, {categories : data.categories});
+      $('#icons').html(html);
+    });
+  }
+  function getCartData() {
+    $.getJSON('cart.json', function (data) {
+      console.log(data);
+    });
+  }
+</script>
+
 </html>
