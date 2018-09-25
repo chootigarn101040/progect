@@ -8,18 +8,29 @@
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="ejs.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
-<script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDk4uvNp5soVTYna-5gn46EYdOWwNykBDk",
-    authDomain: "shopee-87359.firebaseapp.com",
-    databaseURL: "https://shopee-87359.firebaseio.com",
-    projectId: "shopee-87359",
-    storageBucket: "shopee-87359.appspot.com",
-    messagingSenderId: "962649805952"
-  };
-  firebase.initializeApp(config);
-</script>
+  <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-firestore.js"></script>
+
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDk4uvNp5soVTYna-5gn46EYdOWwNykBDk",
+      authDomain: "shopee-87359.firebaseapp.com",
+      databaseURL: "https://shopee-87359.firebaseio.com",
+      projectId: "shopee-87359",
+      storageBucket: "shopee-87359.appspot.com",
+      messagingSenderId: "962649805952"
+    };
+    firebase.initializeApp(config);
+
+    // Initialize Cloud Firestore through Firebase
+    var db = firebase.firestore();
+
+    // Disable deprecated features
+    db.settings({
+      timestampsInSnapshots: true
+    });
+
+  </script>
   <style>
     .toolbaricon {
       padding-left: 5px;
@@ -66,10 +77,10 @@
         <ons-carousel-item id="carousel3" style="background: url('images/3.jpg') no-repeat center; background-size: contain;">
         </ons-carousel-item>
       </ons-carousel>
-      
-        <div id="icons"></div>
 
-        <script id="icon_template" type="text/template">
+      <div id="icons"></div>
+
+      <script id="icon_template" type="text/template">
         <ons-row style="height:120px" vertical-align="center">  
         <% categories.forEach(function(category){%>  
         <ons-col style="background:#66ff99;" width="33%">
@@ -84,7 +95,7 @@
         </ons-row>
         </script>
 
-      
+
     </ons-page>
   </template>
 
@@ -155,15 +166,19 @@
     }
   });
   function getHomeData() {
-    $.getJSON('home.json', function (data) {
-      console.log(data);
-      $('#appname').html(data.appname);
-      var style = "background: url('images/" + data.slides[0] + "') no-repeat center; background-size: contain;'";
-      $('#carousel1').attr('style', style)
-      var icon_template = $('#icon_template').html();
-      var html = ejs.render(icon_template, {categories : data.categories});
-      $('#icons').html(html);
-    });
+    var docRef = db.collection("UI").doc("home");
+
+
+
+    //$.getJSON('home.json', function (data) {
+    //  console.log(data);
+    // $('#appname').html(data.appname);
+    // var style = "background: url('images/" + data.slides[0] + "') no-repeat center; background-size: contain;'";
+    // $('#carousel1').attr('style', style)
+    // var icon_template = $('#icon_template').html();
+    // var html = ejs.render(icon_template, { categories: data.categories });
+    //  $('#icons').html(html);
+    // });
   }
   function getCartData() {
     $.getJSON('cart.json', function (data) {
