@@ -7,7 +7,9 @@
   <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
   <script src="ejs.js"></script>
+  
   <script src="https://www.gstatic.com/firebasejs/5.5.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.4.1/firebase-firestore.js"></script>
 
   <script>
@@ -60,6 +62,8 @@
       <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="7" active>
       </ons-tab>
       <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
+      </ons-tab>
+      <ons-tab page="tab3.html" label="categories" icon="book" active-icon="book">
       </ons-tab>
     </ons-tabbar>
   </ons-page>
@@ -151,6 +155,18 @@
       </p>
     </ons-page>
   </template>
+
+  <template id="tab3.html">
+    <ons-page id="Tab3">
+     
+        </ons-row>
+        </script>
+
+
+    </ons-page>
+  </template>
+
+
 </body>
 <script>
   getHomeData();
@@ -166,9 +182,28 @@
     }
   });
   function getHomeData() {
+
     var docRef = db.collection("UI").doc("home");
+    docRef.get().then(function (doc) {
+      if (doc.exists) {
 
+        //display data
+        console.log("Document data:", doc.data());
+        var data = doc.data();
+        $('#appname').html(data.appname);
+        var style = "background: url('" + data.slides[0] + "') no-repeat center; background-size: contain;'";
+        $('#carousel1').attr('style', style)
+        var icon_template = $('#icon_template').html();
+        var html = ejs.render(icon_template, { categories: data.categories });
+        $('#icons').html(html);
 
+      } else {
+
+        console.log("No such document!");
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
 
     //$.getJSON('home.json', function (data) {
     //  console.log(data);
