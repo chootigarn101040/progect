@@ -141,9 +141,9 @@
 
         <ons-list>
             <ons-list-header>Product</ons-list-header>
-            <div id="pic"></div>
+            <div id="img"></div>
     
-            <script id="pic_template" type="text/template">
+            <script id="img_template" type="text/template">
               <% categories.forEach(function(Products){%>  
             <ons-list-item>
               <div class="left">
@@ -155,7 +155,8 @@
               </div>
             </ons-list-item>
             <%});%>
-    
+          </script>
+        </ons-list>
       <p style="text-align: center; margin: 10px;">
         <ons-button modifier="large" onclick="addNewData();">
           Add New Data
