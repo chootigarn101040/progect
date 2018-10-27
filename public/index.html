@@ -152,10 +152,11 @@
          <script id="allPro_template" type="text/template"> 
         <% allPro.forEach(function(allPro){
           var item = allPro.data();
+
           %>  
           <ons-col width="100%">
             <ons-card>
-              <img src="" alt="Onsen UI" style="width: 100%">
+              <center><img src="<%=item.photo%>" alt="Onsen UI" style="width: 50%"></center>
               <div class="title">
                 <%=item.title%>
               </div>
@@ -168,7 +169,7 @@
         </script>
   
         </ons-row>
-        <ons-button onclick="addnewdata()">
+        <ons-button modifier="large" onclick="addnewdata()" >
           ADD DATA
         </ons-button>
   
