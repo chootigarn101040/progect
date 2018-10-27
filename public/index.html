@@ -89,7 +89,7 @@
         <% categories.forEach(function(category){%>  
         <ons-col style="background:#996699;" width="33%">
           <p style="text-align: center; margin: 10px;">
-            <ons-icon size="60px" icon="<%= category.icon %>" onclick="icon();"></ons-icon>
+            <ons-icon size="60px" icon="<%= category.icon %>" onclick="addNewData();"></ons-icon>
           </p>
           <p style="text-align: center; margin: 10px;" id="icon1_text">
             <%= category.name %>
@@ -131,7 +131,7 @@
       </script>
       </ons-list>
       <p style="text-align: center; margin: 10px;">
-        <ons-button modifier="large">PROCEED TO PAY</ons-button>
+        <ons-button modifier="large" onclick="addNewData();" >PROCEED TO PAY</ons-button>
       </p>
     </ons-page>
   </template>
@@ -298,6 +298,26 @@
       });
 
   }
+
+// <!-- 
+//  function icon() {
+
+// var data = {
+//   pid: 5,
+//   title: 'iPhoneXS',
+//   price: 50000,
+//   category: 'smartphone'
+// }
+
+// db.collection("products").add(data)
+// .then(function (docRef) {
+//   console.log("Document written with ID: ", docRef.id);
+// })
+//   .catch(function (error) {
+//     console.error("Error adding document: ", error);
+//   });
+
+// } -->
 
 
 
