@@ -153,10 +153,14 @@
                 <span class="list-item__title"><%= Products.title %>"</span>
                 <span class="list-item__subtitle" ><%= Products.price %></span>
               </div>
+              <div class="right">
+                  <span class="list-item__subtitle"><%= Products.category %>"</span>
+                </div>
             </ons-list-item>
             <%});%>
           </script>
         </ons-list>
+
       <p style="text-align: center; margin: 10px;">
         <ons-button modifier="large" onclick="addNewData();">
           Add New Data
@@ -241,7 +245,7 @@
 
 
 
-  function getProductsData() {
+  function getCategoriesData() {
     var docRef = db.collection("UI").doc("categories");
     docRef.get().then(function (doc) {
       if (doc.exists) {
