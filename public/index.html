@@ -139,7 +139,7 @@
   <template id="tab3.html">
     <ons-page id="Tab3">
 
-        <ons-list>
+        <!-- <ons-list>
             <ons-list-header>Product</ons-list-header>
             <div id="prod"></div>
     
@@ -159,7 +159,7 @@
             </ons-list-item>
             <%});%>
           </script>
-        </ons-list>
+        </ons-list> -->
 
       <p style="text-align: center; margin: 10px;">
         <ons-button modifier="large" onclick="addNewData();">
@@ -245,27 +245,27 @@
 
 
 
-  function getCategoriesData() {
-    var docRef = db.collection("UI").doc("categories");
-    docRef.get().then(function (doc) {
-      if (doc.exists) {
+  // function getCategoriesData() {
+  //   var docRef = db.collection("UI").doc("categories");
+  //   docRef.get().then(function (doc) {
+  //     if (doc.exists) {
 
-        //display data
-        console.log("Document data:", doc.data());
-        var data = doc.data();
-        var prod_template = $('#prod_template').html();
-        var html = ejs.render(prod_template, { Products: data.Products });
-        $('#prod').html(html);
+  //       //display data
+  //       console.log("Document data:", doc.data());
+  //       var data = doc.data();
+  //       var prod_template = $('#prod_template').html();
+  //       var html = ejs.render(prod_template, { Products: data.Products });
+  //       $('#prod').html(html);
 
 
-      } else {
+  //     } else {
 
-        console.log("No such document!");
-      }
-    }).catch(function (error) {
-      console.log("Error getting document:", error);
-    });
-  }
+  //       console.log("No such document!");
+  //     }
+  //   }).catch(function (error) {
+  //     console.log("Error getting document:", error);
+  //   });
+  // }
 
 
 
