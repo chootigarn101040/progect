@@ -146,12 +146,12 @@
         <p> สินค้าตัวใหม่ในวันนี้ </p>
         
         <ons-row>
-            <div id="allP"></div>
+            <div id="allPro"></div>
           
           
-         <script id="allP_template" type="text/template"> 
-        <% allP.forEach(function(all){
-          var item = allP.data();
+         <script id="allPro_template" type="text/template"> 
+        <% allPro.forEach(function(allPro){
+          var item = allPro.data();
           %>  
           <ons-col width="100%">
             <ons-card>
@@ -277,7 +277,7 @@
 
   function getAllProduct() {
     //Get all product from Firebase
-    var apr = db.collection("categories")  //.where("category", "==", "sport"); //เลือกเฉพาะ
+    var apr = db.collection("products")  //.where("category", "==", "sport"); //เลือกเฉพาะ
     apr.get().then(function (querySnapshot) {
       
       /*querySnapshot.forEach(function (doc) {
@@ -291,10 +291,10 @@
         
       })*/
 
-      var allP_template = $('#allP_template').html();
+      var allPro_template = $('#allPro_template').html();
       console.log(querySnapshot);
-      var html = ejs.render(allP_template, { allP : querySnapshot.docs });
-      $('#allP').html(html);
+      var html = ejs.render(allPro_template, { allPro : querySnapshot.docs });
+      $('#allPro').html(html);
     })
   }
 
