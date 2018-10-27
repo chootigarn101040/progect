@@ -141,9 +141,9 @@
 
         <ons-list>
             <ons-list-header>Product</ons-list-header>
-            <div id="img"></div>
+            <div id="prod"></div>
     
-            <script id="img_template" type="text/template">
+            <script id="prod_template" type="text/template">
               <% categories.forEach(function(Products){%>  
             <ons-list-item>
               <div class="left">
@@ -239,27 +239,29 @@
     });
   }
 
-  // function getProductsData() {
-  //   var docRef = db.collection("UI").doc("categories");
-  //   docRef.get().then(function (doc) {
-  //     if (doc.exists) {
-
-  //       //display data
-  //       console.log("Document data:", doc.data(Products));
-  //       var data = doc.data();
-  //       var prod_template = $('#prod_template').html();
-  //       var html = ejs.render(prod_template, { Products: data.Products });
-  //       $('#prod').html(html);
 
 
-  //     } else {
+  function getProductsData() {
+    var docRef = db.collection("UI").doc("categories");
+    docRef.get().then(function (doc) {
+      if (doc.exists) {
 
-  //       console.log("No such document!");
-  //     }
-  //   }).catch(function (error) {
-  //     console.log("Error getting document:", error);
-  //   });
-  // }
+        //display data
+        console.log("Document data:", doc.data(Products));
+        var data = doc.data();
+        var prod_template = $('#prod_template').html();
+        var html = ejs.render(prod_template, { Products: data.Products });
+        $('#prod').html(html);
+
+
+      } else {
+
+        console.log("No such document!");
+      }
+    }).catch(function (error) {
+      console.log("Error getting document:", error);
+    });
+  }
 
 
 
