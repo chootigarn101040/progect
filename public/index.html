@@ -141,17 +141,17 @@
         <p style="text-align: center; margin-top: 10px;">
           <ons-search-input placeholder="Search" onchange="ons.notification.alert('Searched for: ' + this.value)"></ons-search-input>
         </p>
-        <br>
-        <br>
-        <p> สินค้าตัวใหม่ในวันนี้</p>
+        <hr>
+        
+        <p> สินค้าตัวใหม่ในวันนี้ </p>
         
         <ons-row>
-            <div id="all"></div>
+            <div id="allP"></div>
           
           
-         <script id="all_template" type="text/template"> 
-        <% all.forEach(function(all){
-          var item = all.data();
+         <script id="allP_template" type="text/template"> 
+        <% allP.forEach(function(all){
+          var item = allP.data();
           %>  
           <ons-col width="100%">
             <ons-card>
@@ -277,24 +277,24 @@
 
   function getAllProduct() {
     //Get all product from Firebase
-    var apr = db.collection("Products")  //.where("category", "==", "sport"); //เลือกเฉพาะ
+    var apr = db.collection("categories")  //.where("category", "==", "sport"); //เลือกเฉพาะ
     apr.get().then(function (querySnapshot) {
       
       /*querySnapshot.forEach(function (doc) {
         var data = doc.data();
         console.log(data);
-        var all_template = $('#all_template').html();
+        var allP_template = $('#allP_template').html();
         querySnapshot
-        var html = ejs.render(all_template, { all: data });
+        var html = ejs.render(allP_template, { allP : data });
         console.log(html);
-        $('#all').html(html);
+        $('#allP').html(html);
         
       })*/
 
-      var all_template = $('#all_template').html();
+      var allP_template = $('#allP_template').html();
       console.log(querySnapshot);
-      var html = ejs.render(all_template, { all : querySnapshot.docs });
-      $('#all').html(html);
+      var html = ejs.render(allP_template, { allP : querySnapshot.docs });
+      $('#allP').html(html);
     })
   }
 
