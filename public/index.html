@@ -34,13 +34,16 @@
 
   </script>
   <style>
+
     .toolbaricon {
 
       padding-left: 5px;
       padding-bottom: 5px;
       padding-right: 5px;
       color: #efc1db;
+     
     }
+ 
   </style>
 
 
@@ -50,7 +53,7 @@
 <body>
 
   <ons-page>
-    <ons-toolbar>
+    <ons-toolbar style="background-color: aquamarine">
       <div class="left">
         <ons-icon class="toolbaricon" size="30px" icon="fa-shopping-bag">
         </ons-icon>
@@ -62,7 +65,7 @@
       </div>
     </ons-toolbar>
 
-    <ons-tabbar swipeable position="auto" id="tabbar">
+    <ons-tabbar swipeable position="auto" id="tabbar" >
       <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="7" active>
       </ons-tab>
       <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
@@ -359,8 +362,6 @@
     })
 
   }
-
-
 
 
   function addNewData() {
