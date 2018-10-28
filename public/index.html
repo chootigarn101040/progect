@@ -34,11 +34,15 @@
 
   </script>
   <style>
+
+    
+
     .toolbaricon {
+      
       padding-left: 5px;
       padding-bottom: 5px;
       padding-right: 5px;
-      color: orange;
+      color: #efc1db;
     }
   </style>
 
@@ -90,7 +94,7 @@
       <script id="icon_template" type="text/template">
         <ons-row style="height:120px" vertical-align="center">  
         <% categories.forEach(function(category){%>  
-        <ons-col style="background:#FF9966;" width="33%" onclick="changeTab('<%= category.name %>')">
+        <ons-col style="background:#efc1db;" width="33%"  onclick="changeTab('<%= category.name %>')">
           <p style="text-align: center; margin: 10px;">
             <ons-icon size="60px" icon="<%= category.icon %>" ></ons-icon>
           </p>
@@ -179,6 +183,56 @@
   
       </ons-page>
     </template>
+
+    <template id="detailP.html">
+        <ons-page>
+          <script>
+          var datadep = localStorage.getItem('getDep');
+          console.log(datadep)
+          </script>
+            <ons-toolbar>
+                <div class="left"><ons-back-button>Back</ons-back-button></div>
+                <div class="center">Detail</div>
+            </ons-toolbar>
+    
+           <div id="showDep"></div>
+          
+           <script id="Detailproduct_template" type="text/template">
+              <ons-card>
+                  <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
+                    
+                        <ons-carousel-item id="carousel1DeP" style="background: url('images/1.jpg') no-repeat center; background-size: contain;">
+                        </ons-carousel-item>
+                        <ons-carousel-item id="carousel2DeP" style="background: url('images/2.jpg') no-repeat center; background-size: contain;">
+                        </ons-carousel-item>
+                        <ons-carousel-item id="carousel3DeP" style="background: url('images/3.jpg') no-repeat center; background-size: contain;">
+                        </ons-carousel-item>
+          
+                 </ons-carousel>
+                      <% dataDep.forEach(function(dataDep){   
+                        var data = dataDep.data(); %>
+                  <div class="title">
+                    <%= data.price%>
+                  </div>
+                  <div class="content">
+                    <div>
+                      <%= data.title %>
+                    </div>
+                    <ons-list>
+                      <ons-list-header>Bindings</ons-list-header>
+                      <ons-list-item>Vue</ons-list-item>
+                      <ons-list-item>Angular</ons-list-item>
+                      <ons-list-item>React</ons-list-item>
+                    </ons-list>
+                  </div>
+                  <%})%>
+                </ons-card>
+                
+           </script>
+    
+        </ons-page>
+      </template>
+
 </body>
 
 <script>
@@ -271,32 +325,6 @@
     });
   }
 
-
-
-  // function getCategoriesData() {
-  //   var docRef = db.collection("UI").doc("categories");
-  //   docRef.get().then(function (doc) {
-  //     if (doc.exists) {
-
-  //       //display data
-  //       console.log("Document data:", doc.data());
-  //       var data = doc.data();
-  //       var prod_template = $('#prod_template').html();
-  //       var html = ejs.render(prod_template, { Products: data.Products });
-  //       $('#prod').html(html);
-
-
-  //     } else {
-
-  //       console.log("No such document!");
-  //     }
-  //   }).catch(function (error) {
-  //     console.log("Error getting document:", error);
-  //   });
-  // }
-
-
-
   function getAllProduct(name2) {
     if(name2==null){
       var apr = db.collection("products")
@@ -340,7 +368,23 @@
 
   }
 
+function showDetailP() {
+    var dataproduct = localStorage.getItem('getDep');
+    var apr = db.collection("Products").where("title", "==", dataproduct);
+    apr.get().then(function (querySnapshot) {
+      var Detailproduct_template = $('#Detailproduct_template').html();
+      var html = ejs.render(Detailproduct_template, { dataDep: querySnapshot.docs });
+      $('#showDep').html(html); 
+    })
+  
+  }
 
+function getDetail(getDep){
+localStorage.setItem("getDep",getDep)
+showDetailP();
+myNavigator.pushPage('detailP.html');
+
+}
 
 
 
