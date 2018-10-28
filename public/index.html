@@ -45,6 +45,15 @@
 
 
 <body>
+
+    <style type="text/css">
+      body {
+          background-color:pink;
+          background-repeat: no-repeat;
+          background-size: cover;
+      }
+    </style>
+    
   <ons-page>
     <ons-toolbar>
       <div class="left">
@@ -143,20 +152,20 @@
         </p>
         <hr>
         
-        <p> สินค้าตัวใหม่ในวันนี้ </p>
+        <p> &nbsp;&nbsp; สินค้าตัวใหม่ในวันนี้ </p>
         
-        <ons-row>
+       
             <div id="allPro"></div>
           
           
-         <script id="allPro_template" type="text/template"> 
+         <script id="allPro_template" type="text/template">  <ons-row>
         <% allPro.forEach(function(allPro){
           var item = allPro.data();
 
           %>  
-          <ons-col width="100%">
+          <ons-col width="50%">
             <ons-card>
-              <center><img src="<%=item.photo%>" alt="Onsen UI" style="width: 70%"></center>
+              <center><img src="<%=item.photo%>" alt="Onsen UI" style="width: 100%"></center>
               <div class="title">
                 <%=item.title%>
               </div>
