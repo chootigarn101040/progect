@@ -51,7 +51,7 @@
 
 
 <body>
-
+<ons-navigator swipeable id="myNavigator">
   <ons-page>
     <ons-toolbar style="background-color: aquamarine">
       <div class="left">
@@ -65,7 +65,7 @@
       </div>
     </ons-toolbar>
 
-    <ons-tabbar swipeable position="auto" id="tabbar" style="background-color: aquamarine" >
+    <ons-tabbar swipeable position="auto" id="tabbar" >
       <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="7" active>
       </ons-tab>
       <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
@@ -74,6 +74,7 @@
       </ons-tab>
     </ons-tabbar>
   </ons-page>
+</ons-navigator>
 
   <template id="tab1.html">
     <ons-page id="Tab1">
@@ -137,7 +138,7 @@
       </script>
       </ons-list>
       <p style="text-align: center; margin: 10px;">
-        <ons-button modifier="large" onclick="addNewData();">PROCEED TO PAY</ons-button>
+        <ons-button modifier="large" onclick="addNewData();" >PROCEED TO PAY</ons-button>
       </p>
     </ons-page>
   </template>
@@ -162,7 +163,7 @@
           var item = allPro.data();
 
           %>  
-          <ons-col width="50%">
+          <ons-col width="50%" onclick="getDetail('<%=item.title%>');">
             <ons-card>
               <center><img src="<%=item.photo%>" alt="Onsen UI" style="width: 60%"></center>
               <div class="title">
@@ -354,7 +355,7 @@
 
   function showDetailP() {
     var dataproduct = localStorage.getItem('getDep');
-    var apr = db.collection("Products").where("title", "==", dataproduct);
+    var apr = db.collection("products").where("title", "==", dataproduct);
     apr.get().then(function (querySnapshot) {
       var Detailproduct_template = $('#Detailproduct_template').html();
       var html = ejs.render(Detailproduct_template, { dataDep: querySnapshot.docs });
