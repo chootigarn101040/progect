@@ -165,7 +165,7 @@
           %>  
           <ons-col width="50%" onclick="getDetail('<%=item.title%>');">
             <ons-card>
-              <center><img src="<%=item.photo%>" alt="Onsen UI" style="width: 60%"></center>
+              <center><img src="<%=item.photo[0]%>" alt="Onsen UI" style="width: 60%"></center>
               <div class="title">
                 <%=item.title%>
               </div>
@@ -202,18 +202,19 @@
 
       <script id="Detailproduct_template" type="text/template">
               <ons-card>
+                <% dataDep.forEach(function(dataDep){   
+                        var data = dataDep.data(); %>
                   <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
                     
-                        <ons-carousel-item id="carousel1DeP" style="background: url('images/1.jpg') no-repeat center; background-size: contain;">
+                        <ons-carousel-item id="carousel1DeP" style="background: url('<%= data.photo[0]%>') no-repeat center; background-size: contain;">
                         </ons-carousel-item>
-                        <ons-carousel-item id="carousel2DeP" style="background: url('images/2.jpg') no-repeat center; background-size: contain;">
+                        <ons-carousel-item id="carousel2DeP" style="background: url('<%= data.photo[1]%>') no-repeat center; background-size: contain;">
                         </ons-carousel-item>
-                        <ons-carousel-item id="carousel3DeP" style="background: url('images/3.jpg') no-repeat center; background-size: contain;">
+                        <ons-carousel-item id="carousel3DeP" style="background: url('<%= data.photo[2]%>') no-repeat center; background-size: contain;">
                         </ons-carousel-item>
           
                  </ons-carousel>
-                      <% dataDep.forEach(function(dataDep){   
-                        var data = dataDep.data(); %>
+                      
                   <div class="title">
                     <%= data.price%>
                   </div>
