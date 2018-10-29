@@ -113,32 +113,34 @@
 
   <template id="tab2.html">
     <ons-page id="Tab2">
+      <p><h5><b>Shopping Cart</b></h5></p>
+      <div id="showDataCart"></div>
 
+      <script id="cart_template" type="text/template">
       <ons-list>
-        <ons-list-header>Shopping Cart</ons-list-header>
-        <div id="img"></div>
-        <script id="img_template" type="text/template">
-          <% cart.forEach(function(cart){%>  
+        
+        <% cartData.forEach(function(cartData){
+          var cartData = cartData.data(); 
+        %>
         <ons-list-item>
           <div class="left">
-            <img class="list-item__thumbnail" src="<%= cart.photo %>">
+            <img class="list-item__thumbnail" src="<%=cartData.photo[0]%>">
           </div>
           <div class="center">
-            <span class="list-item__title"><%= cart.itemname %>"</span>
-            <span class="list-item__subtitle" style="color: blue"><%= cart.price %></span>
+            <span class="list-item__title"><%=cartData.title%></span>
+            <span class="list-item__subtitle" style="color: blue"><%=cartData.price%></span>
           </div>
           <div class="right">
             <p style="text-align: center; margin: 10px;">
               <ons-icon style="color: grey" size="30px" icon="md-delete"></ons-icon>
             </p>
           </div>
-        </ons-list-item>
-        <%});%>
-
-      </script>
+        </ons-list-item>    
       </ons-list>
+      <%})%>
+    </script>
       <p style="text-align: center; margin: 10px;">
-        <ons-button modifier="large" onclick="addNewData();" >PROCEED TO PAY</ons-button>
+        <ons-button modifier="large">PROCEED TO PAY</ons-button>
       </p>
     </ons-page>
   </template>
@@ -229,6 +231,7 @@
                       <ons-list-item>React</ons-list-item>
                     </ons-list>
                   </div>
+                  <ons-button onclick="addtocart('<%= data.title %>')">ADD TO CART</ons-button>
                   <%})%>
                 </ons-card>
                 
@@ -249,7 +252,7 @@
     } else if (event.index == 1) {
       console.log('Cart clicked');
       // get data for cart screen  
-      getCartData();
+      getData2cart()
     } else if (event.index == 2) {
       console.log('All products clicked');
       var name2 = localStorage.getItem('name');
@@ -392,7 +395,33 @@
     myNavigator.pushPage('detailP.html');
 
   }
+  var dataCart = [];
+function addtocart(add2cart){
+  localStorage.clear('quentinTarantino');
+localStorage.setItem('quentinTarantino',add2cart);
+var retrievedData = localStorage.getItem("quentinTarantino");
+console.log(retrievedData);
+dataCart.push(retrievedData);
+alert(dataCart);
+}
 
+function getData2cart(){
+  console.log('functioncart');
+  console.log(dataCart);
+  document.getElementById('showDataCart').innerHTML = '';
+  dataCart.forEach(function(dataCart){
+    var apr = db.collection("products").where("title", "==",dataCart);
+    apr.get().then(function (querySnapshot) {
+      console.log(querySnapshot.docs)
+      var cart_template = $('#cart_template').html();
+      var html = ejs.render(cart_template, { cartData: querySnapshot.docs });
+      
+      $('#showDataCart').append(html); 
+    
+    })
+    
+  })
+}
 
 
 </script>
