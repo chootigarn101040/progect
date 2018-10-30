@@ -66,7 +66,7 @@
     </ons-toolbar>
 
     <ons-tabbar swipeable position="auto" id="tabbar" >
-      <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home" badge="7" active>
+      <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home"  active>
       </ons-tab>
       <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
       </ons-tab>
@@ -79,7 +79,7 @@
   <template id="tab1.html">
     <ons-page id="Tab1">
       <p style="text-align: center; margin-top: 10px;">
-        <ons-search-input placeholder="Search" onchange="ons.notification.alert('Searched for: ' + this.value)"></ons-search-input>
+        <ons-search-input placeholder="Search" onchange="search(this.value)"></ons-search-input>
       </p>
       <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
         <ons-carousel-item id="carousel1" style="background: url('images/1.jpg') no-repeat center; background-size: contain;">
@@ -95,7 +95,7 @@
       <script id="icon_template" type="text/template">
         <ons-row style="height:120px" vertical-align="center">  
         <% categories.forEach(function(category){%>  
-        <ons-col style="background:<%= category.color %>"; width="33%"  onclick="changeTab('<%= category.name %>')">
+        <ons-col style="background-color:aquamarine"; width="33%"  onclick="changeTab('<%= category.name %>')">
           <p style="text-align: center; margin: 10px;">
             <ons-icon size="60px" icon="<%= category.icon %>" ></ons-icon>
           </p>
@@ -224,12 +224,7 @@
                     <div>
                       <%= data.title %>
                     </div>
-                    <ons-list>
-                      <ons-list-header>Bindings</ons-list-header>
-                      <ons-list-item>Vue</ons-list-item>
-                      <ons-list-item>Angular</ons-list-item>
-                      <ons-list-item>React</ons-list-item>
-                    </ons-list>
+                    
                   </div>
                   <ons-button onclick="addtocart('<%= data.title %>')">ADD TO CART</ons-button>
                   <%})%>
@@ -244,6 +239,7 @@
 
 <script>
   getHomeData();
+  tatol();
   document.addEventListener('prechange', function (event) {
     if (event.index == 0) {
       console.log('Home clicked');
@@ -256,15 +252,15 @@
     } else if (event.index == 2) {
       console.log('All products clicked');
       var name2 = localStorage.getItem('name');
-      console.log('products clicked');
+      var itemPro = localStorage.getItem('itemPro');
+      console.log(itemPro);
       // get data for all product screen  
-      if (name2 == null) {
+      if (name2 == null&&itemPro==null) {
         console.log(name2)
         getAllProduct();
       }
-      else {
-
-        getAllProduct(name2);
+      else if(name2 != null || itemPro != null) {
+        getAllProduct(name2,itemPro);
       }
       localStorage.clear();
 
@@ -333,8 +329,10 @@
     });
   }
 
-  function getAllProduct(name2) {
-    if (name2 == null) {
+  function getAllProduct(name2,itemPro) {
+    console.log(itemPro);
+    
+    if (name2 == null && itemPro == null) {
       var apr = db.collection("products")
       apr.get().then(function (querySnapshot) {
 
@@ -345,7 +343,7 @@
       })
     }
 
-    else {
+    else if(name2!=undefined&&itemPro==undefined){
       var apr = db.collection("products").where("category", "==", name2);
       apr.get().then(function (querySnapshot) {
 
@@ -422,6 +420,57 @@ function getData2cart(){
     
   })
 }
+
+function search(search) {
+  localStorage.setItem('itemPro',search)
+   const filterItems = (needle, heystack) => {
+    let query = needle.toLowerCase();
+    return heystack.filter(item => item.data().title.toLowerCase().indexOf(needle) >= 0);
+  }
+  console.log("55+", filterItems(search, data));
+  var item=filterItems(search, data);
+  console.log("xxx",item)
+  localStorage.setItem('items', item);
+  
+
+  console.log('tong',item);
+  
+test(item);
+
+document.getElementById('tabbar').setActiveTab(2);
+    // localStorage.setItem('title', item);
+  }
+  const data = []
+
+  function tatol() {
+    console.log(search);
+    db.collection("products").get()
+      .then(function (querySnapshot) {
+
+        querySnapshot.docs.forEach(function (item) {
+          data.push(item)
+          console.log(data)
+        });
+        
+      })
+    // const fruits = data[1];
+  }
+
+
+function test(title){
+console.log("888",title);
+// for(var i =0;i<tests.length;i++){
+    
+ 
+    console.log('tset',title);
+
+        // doc.data() is never undefined for query doc snapshots
+        
+        var allPro_template = $('#allPro_template').html();
+         var html = ejs.render(allPro_template, { allPro: title });
+        $('#allPro').html(html);
+  
+ }
 
 
 </script>
