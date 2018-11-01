@@ -66,11 +66,11 @@
     </ons-toolbar>
 
     <ons-tabbar swipeable position="auto" id="tabbar" >
-      <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home"  active>
+      <ons-tab page="tab1.html" label="Home" icon="ion-home, material:md-home"  active style="background-color:aquamarine" >
       </ons-tab>
-      <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart">
+      <ons-tab page="tab2.html" label="Cart" icon="fa-shopping-cart" active-icon="fa-shopping-cart" style="background-color:aquamarine">
       </ons-tab>
-      <ons-tab page="tab3.html" label="Products" icon="book" active-icon="book">
+      <ons-tab page="tab3.html" label="Products" icon="book" active-icon="book" style="background-color:aquamarine" >
       </ons-tab>
     </ons-tabbar>
   </ons-page>
@@ -82,11 +82,11 @@
         <ons-search-input placeholder="Search" onchange="search(this.value)"></ons-search-input>
       </p>
       <ons-carousel swipeable auto-scroll overscrollable id="carousel" style="height: 300px;">
-        <ons-carousel-item id="carousel1" style="background: url('images/1.jpg') no-repeat center; background-size: contain;">
+        <ons-carousel-item id="carousel1" style="background: url('images/ww.jpg') no-repeat center; background-size: contain;">
         </ons-carousel-item>
-        <ons-carousel-item id="carousel2" style="background: url('images/2.jpg') no-repeat center; background-size: contain;">
+        <ons-carousel-item id="carousel2" style="background: url('images/x1.jpg') no-repeat center; background-size: contain;">
         </ons-carousel-item>
-        <ons-carousel-item id="carousel3" style="background: url('images/3.jpg') no-repeat center; background-size: contain;">
+        <ons-carousel-item id="carousel3" style="background: url('images/x2.jpg') no-repeat center; background-size: contain;">
         </ons-carousel-item>
       </ons-carousel>
 
@@ -95,7 +95,7 @@
       <script id="icon_template" type="text/template">
         <ons-row style="height:120px" vertical-align="center">  
         <% categories.forEach(function(category){%>  
-        <ons-col style="background-color:aquamarine"; width="33%"  onclick="changeTab('<%= category.name %>')">
+        <ons-col style="background-color:#efc1db"; width="33%"  onclick="changeTab('<%= category.name %>')">
           <p style="text-align: center; margin: 10px;">
             <ons-icon size="60px" icon="<%= category.icon %>" ></ons-icon>
           </p>
@@ -166,7 +166,7 @@
 
           %>  
           <ons-col width="50%" onclick="getDetail('<%=item.title%>');">
-            <ons-card>
+            <ons-card style="background-color:#EFA694" >
               <center><img src="<%=item.photo[0]%>" alt="Onsen UI" style="width: 60%"></center>
               <div class="title">
                 <%=item.title%>
